@@ -35,11 +35,13 @@ class CustomUserManager(BaseUserManager):
         user.save()
         return user
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
         ordering = ("-id",)
+        db_table = "users"
 
     first_name = models.CharField(max_length=150, blank=True, null=False)
     last_name = models.CharField(max_length=150, blank=True, null=False)
@@ -57,3 +59,19 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+
+class Profile(models.Model):
+    class Meta:
+        verbose_name = "Profile"
+        verbone_name_plural = "Profiles"
+        ordering = ("-id",)
+        db_table = "profiles"
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_photo = models.ImageField(upload_to="profiles/photos/%Y/%m/%d/")
+    biography = models.CharField(max_length=150, blank=True, null=False)
+
+    def __str__(self) -> str:
+        return f"Profile of: {self.user.username}"
+
