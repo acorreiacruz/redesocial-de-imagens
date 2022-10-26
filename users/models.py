@@ -70,7 +70,7 @@ class Profile(models.Model):
         db_table = "profiles"
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_photo = models.ImageField(upload_to="profiles/photos/%Y/%m/%d/")
+    photo = models.ImageField(upload_to="profiles/photos/%Y/%m/%d/")
     biography = models.CharField(max_length=150, blank=True, null=False)
 
     def __str__(self) -> str:
