@@ -8,9 +8,15 @@ class Following(models.Model):
         verbose_name_plural = "Following"
         ordering = ("-id",)
         db_table = "following"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "following"],
+                name="user_cant_follow_yourself"
+            )
+        ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    following = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
+    following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="folowed")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
