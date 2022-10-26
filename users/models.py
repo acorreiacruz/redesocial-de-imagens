@@ -77,6 +77,20 @@ class Profile(models.Model):
         return f"Profile of: {self.user.username}"
 
 
+class Follower(models.Model):
+    class Meta:
+        verbose_name = "Follower"
+        verbose_name_plural = "Followers"
+        ordering = ("-id",)
+        db_table = "followers"
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    follower = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"User {self.user.username} followed by {self.follower.username}"
+
+
 class Post(models.Model):
     class Meta:
         verbose_name = "Post"
