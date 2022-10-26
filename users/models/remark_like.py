@@ -10,7 +10,7 @@ class RemarkLike(models.Model):
         ordering = ("-id",)
         db_table = "remark_likes"
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    liked_by = models.ForeignKey(User, on_delete=models.CASCADE)
     remark = models.ForeignKey(Remark, on_delete=models.CASCADE)
 
     def __str__(self):
