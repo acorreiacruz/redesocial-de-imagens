@@ -86,6 +86,7 @@ class Follower(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     follower = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return f"User {self.user.username} followed by {self.follower.username}"
@@ -100,6 +101,7 @@ class Following(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     following = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return f"User {self.user.username} following {self.follower.username}"
