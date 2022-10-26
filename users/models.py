@@ -124,7 +124,7 @@ class PostLike(models.Model):
 class Remark(models.Model):
     class Meta:
         verbose_name = "Remark"
-        verbone_name_plural = "Remark"
+        verbone_name_plural = "Remarks"
         ordering = ("-id",)
         db_table = "remarks"
 
@@ -145,3 +145,18 @@ class Remark(models.Model):
     @property
     def post_id(self):
         return self.user.username
+
+
+class RemarkLike(models.Model):
+    class Meta:
+        verbose_name = "RemarkLike"
+        verbone_name_plural = "RemarkLikes"
+        ordering = ("-id",)
+        db_table = "remarks_likes"
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    remark = models.ForeignKey(Remark, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Remark {self.id} liked by {self.user.username}"
+
