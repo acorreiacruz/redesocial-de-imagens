@@ -16,7 +16,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_MODEL_USER = "users.User"
+AUTH_USER_MODEL = "users.User"
 
 # Phone number app configurations
 PHONENUMBER_DB_FORMAT = "E164"
