@@ -153,7 +153,7 @@ class PostLike(models.Model):
         verbose_name = "PostLike"
         verbone_name_plural = "PostLikes"
         ordering = ("-id",)
-        db_table = "posts_likes"
+        db_table = "post_likes"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -202,7 +202,7 @@ class RemarkLike(models.Model):
         verbose_name = "RemarkLike"
         verbone_name_plural = "RemarkLikes"
         ordering = ("-id",)
-        db_table = "remarks_likes"
+        db_table = "remark_likes"
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     remark = models.ForeignKey(Remark, on_delete=models.CASCADE)
