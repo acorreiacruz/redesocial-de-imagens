@@ -5,7 +5,7 @@ from .user import User
 class Post(models.Model):
     class Meta:
         verbose_name = "Post"
-        verbone_name_plural = "Posts"
+        verbose_name_plural = "Posts"
         ordering = ("-id",)
         db_table = "posts"
 

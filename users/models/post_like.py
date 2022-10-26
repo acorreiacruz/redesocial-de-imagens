@@ -6,7 +6,7 @@ from .user import User
 class PostLike(models.Model):
     class Meta:
         verbose_name = "PostLike"
-        verbone_name_plural = "PostLikes"
+        verbose_name_plural = "PostLikes"
         ordering = ("-id",)
         db_table = "post_likes"
 

@@ -6,7 +6,7 @@ from .remark import Remark
 class RemarkLike(models.Model):
     class Meta:
         verbose_name = "RemarkLike"
-        verbone_name_plural = "RemarkLikes"
+        verbose_name_plural = "RemarkLikes"
         ordering = ("-id",)
         db_table = "remark_likes"
 

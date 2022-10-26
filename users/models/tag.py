@@ -6,7 +6,7 @@ from django.utils.text import slugify
 class Tag(models.Model):
     class Meta:
         verbose_name = "Tag"
-        verbone_name_plural = "Tags"
+        verbose_name_plural = "Tags"
         ordering = ("-id",)
         db_table = "tags"
 

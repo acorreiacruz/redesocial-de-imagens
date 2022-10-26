@@ -6,7 +6,7 @@ from .user import User
 class Remark(models.Model):
     class Meta:
         verbose_name = "Remark"
-        verbone_name_plural = "Remarks"
+        verbose_name_plural = "Remarks"
         ordering = ("-id",)
         db_table = "remarks"
 
