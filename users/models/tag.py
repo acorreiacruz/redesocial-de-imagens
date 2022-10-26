@@ -12,7 +12,7 @@ class Tag(models.Model):
 
     name = models.CharField(max_length=50, null=False, blank=False, unique=True)
     slug = models.SlugField(unique=True)
-    post = models.ManyToManyField(Post, on_delete=models.SET_NULL, related_name="tags")
+    post = models.ManyToManyField(Post, related_name="tags")
 
     def save(self, *args, **kwargs):
         self.name = self.name.lower()
