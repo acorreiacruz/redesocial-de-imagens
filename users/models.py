@@ -72,6 +72,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to="profiles/photos/%Y/%m/%d/")
     biography = models.CharField(max_length=150, blank=True, null=False)
+    is_private = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"Profile of: {self.user.username}"
