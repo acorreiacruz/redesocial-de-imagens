@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin, BaseUserManager
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class CustomUserManager(BaseUserManager):
@@ -96,6 +97,27 @@ class Post(models.Model):
         @property
         def username(self):
             return self.user.username
+
+
+class Tag(models.Model):
+    class Meta:
+        verbose_name = "Tag"
+        verbone_name_plural = "Tags"
+        ordering = ("-id",)
+        db_table = "tags"
+
+    name = models.CharField(max_length=50, null=False, blank=False, unique=True)
+    slug = models.SlugField(unique=True)
+    post = models.ManyToManyField(Post, on_delete=models.SET_NULL, related_name="tags")
+
+    def save(self, *args, **kwargs):
+        self.name = self.name.lower()
+        if not self.slug:
+            self.slug = slugify(self.slug)
+        return super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return f"Tag {self.name} on post {self.post.name}"
 
 
 class PostLike(models.Model):
