@@ -19,5 +19,10 @@ class Following(models.Model):
     following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="folowed")
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def save(self, *args, **kwargs):
+        if self.user.id == self.following.id:
+            raise ValueError("A user can't follow yourself !")
+        return super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return f"User {self.user.username} following {self.follower.username}"
