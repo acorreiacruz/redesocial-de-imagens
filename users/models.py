@@ -91,6 +91,20 @@ class Follower(models.Model):
         return f"User {self.user.username} followed by {self.follower.username}"
 
 
+class Following(models.Model):
+    class Meta:
+        verbose_name = "Following"
+        verbose_name_plural = "Following"
+        ordering = ("-id",)
+        db_table = "following"
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    following = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"User {self.user.username} following {self.follower.username}"
+
+
 class Post(models.Model):
     class Meta:
         verbose_name = "Post"
