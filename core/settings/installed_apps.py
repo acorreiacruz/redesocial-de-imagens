@@ -5,4 +5,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # Thrid party apps
+    "phonenumber_field",
+    # My apps
+    "socialnetwork",
+    "users"
 ]
