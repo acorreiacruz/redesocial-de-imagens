@@ -7,3 +7,4 @@ from .databases import*
 from .security import*
 from .i18n import*
 from .static_files import*
+from .rest_framework import*

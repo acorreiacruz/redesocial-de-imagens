@@ -3,8 +3,8 @@ from django.apps import AppConfig
 
 class UsersConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "users"
+    name = "api"
 
     def ready(self, *args, **kwargs) -> None:
-        from users import signals
+        from api import signals
         return super().ready(*args, **kwargs)

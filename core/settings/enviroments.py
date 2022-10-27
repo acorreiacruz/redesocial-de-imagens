@@ -16,10 +16,10 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTH_USER_MODEL = "users.User"
+AUTH_USER_MODEL = "api.User"
 
 AUTHENTICATION_BACKENDS = [
-    "users.backends.EmailOrPhoneNumberBackend",
+    "api.backends.EmailOrPhoneNumberBackend",
 ]
 
 # Phone number app configurations

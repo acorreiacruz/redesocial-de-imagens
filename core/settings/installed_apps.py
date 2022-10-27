@@ -9,5 +9,5 @@ INSTALLED_APPS = [
     "phonenumber_field",
     "rest_framework",
     # My apps
-    "users"
+    "api",
 ]
