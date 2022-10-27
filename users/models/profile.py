@@ -13,6 +13,8 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to="profiles/photos/%Y/%m/%d/")
     biography = models.CharField(max_length=150, blank=True, null=False)
     is_private = models.BooleanField(default=False)
+    folowing = models.PositiveIntegerField(default=0)
+    followers = models.PositiveIntegerField(default=0)
 
     def __str__(self) -> str:
         return f"Profile of: {self.user.username}"
