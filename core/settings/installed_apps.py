@@ -7,6 +7,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Thrid party apps
     "phonenumber_field",
+    "rest_framework",
     # My apps
     "socialnetwork",
     "users"
