@@ -1,5 +1,6 @@
 from django.db import models
 from .user import User
+from django.core.exceptions import ValidationError
 
 
 class Following(models.Model):
@@ -11,13 +12,21 @@ class Following(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=["user", "following"],
-                name="user_cant_follow_yourself"
+                name="user_cant_follow_other_twice"
             )
         ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
     following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="folowed")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def clean(self) -> None:
+        errors = {}
+        if self.user.id == self.following.id:
+            errors['user'] = "A user can't follow yourself !"
+            errors['following'] = "A user can't be followed by yoursel !"
+        if errors:
+            raise ValidationError(errors)
 
     def save(self, *args, **kwargs):
         if self.user.id == self.following.id:
