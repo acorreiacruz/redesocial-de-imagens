@@ -26,4 +26,4 @@ class Remark(models.Model):
 
     @property
     def post_id(self):
-        return self.user.username
+        return self.post.id
