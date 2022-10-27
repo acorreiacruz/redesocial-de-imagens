@@ -8,6 +8,7 @@ class UserAdminConfig(UserAdmin):
     list_display = "id", "username", "email", "is_active", "is_staff"
     list_display_links = ("username", "email")
     list_per_page = 25
+    ordering = ("-id",)
     fieldsets = (
         (
             "Authentication Fields",
