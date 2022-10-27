@@ -34,4 +34,4 @@ class Following(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return f"User {self.user.username} following {self.follower.username}"
+        return f"User {self.user.username} following {self.following.username}"
