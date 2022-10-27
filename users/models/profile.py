@@ -16,3 +16,7 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return f"Profile of: {self.user.username}"
+
+    @property
+    def username(self):
+        return self.user.username
