@@ -71,6 +71,9 @@ class RemarkAdminConfig(admin.ModelAdmin):
     list_display_links = "id", "username"
     list_per_page = 25
 
+
 @admin.register(Post)
 class PostAdminConfig(admin.ModelAdmin):
-    ...
+    list_display = "id", "username", "likes", "created_at"
+    list_display_links = "id", "username"
+    list_per_page = 25
