@@ -14,4 +14,4 @@ class RemarkLike(models.Model):
     remark = models.ForeignKey(Remark, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Remark {self.id} liked by {self.user.username}"
+        return f"Remark {self.id} liked by {self.liked_by.username}"
