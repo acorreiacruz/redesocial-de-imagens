@@ -6,7 +6,7 @@ from .models import Profile, User, Tag, Remark, RemarkLike, Post, PostLike, Foll
 @admin.register(User)
 class UserAdminConfig(UserAdmin):
     list_display = "id", "username", "email", "is_active", "is_staff"
-    list_display_links = "username", "email"
+    list_display_links = ("username", "email")
     list_per_page = 25
     fieldsets = (
         (
@@ -59,7 +59,10 @@ class UserAdminConfig(UserAdmin):
 
 @admin.register(Profile)
 class ProfileAdminConfig(admin.ModelAdmin):
-    ...
+    list_display = "id", "is_private"
+    list_per_page = 25
+    list_display_links = ("id",)
+    list_filter = ("is_private",)
 
 
 @admin.register(Remark)
