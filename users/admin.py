@@ -67,7 +67,9 @@ class ProfileAdminConfig(admin.ModelAdmin):
 
 @admin.register(Remark)
 class RemarkAdminConfig(admin.ModelAdmin):
-    ...
+    list_display = "id", "username", "post_id", "likes", "created_at"
+    list_display_links = "id", "username"
+    list_per_page = 25
 
 @admin.register(Post)
 class PostAdminConfig(admin.ModelAdmin):
