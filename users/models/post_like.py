@@ -9,6 +9,12 @@ class PostLike(models.Model):
         verbose_name_plural = "PostLikes"
         ordering = ("-id",)
         db_table = "post_likes"
+        constraints = [
+            models.UniqueConstraint(
+                fields=["user", "post"],
+                name="user_cant_like_a_post_twice"
+            )
+        ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
