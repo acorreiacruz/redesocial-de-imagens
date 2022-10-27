@@ -19,7 +19,7 @@ class EmailOrPhoneNumberBackend(BaseBackend):
         if username is None or password is None:
             return None
 
-        user = self.get_user_by_password_or_phone_number(username, password)
+        user = self.get_user_by_password_or_phone_number(username)
 
         if user.check_password(password) and self.user_can_authenticate(user):
             return user
