@@ -92,3 +92,7 @@ migrations/
 pytest.ini
 static/
 media/
+
+# VS Code
+.vscode/
+.vscode/*
