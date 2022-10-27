@@ -1,14 +1,14 @@
 from pathlib import Path
-from typing import List
+import os
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = "django-insecure-a!0i7yw43(c0#od!x9(p^3n+$qornbv5s(hinr6cqvg0haz%zl" # noqa
+SECRET_KEY = os.environ.get("SECRET_KEY","Insecure")
 
-DEBUG = True
+DEBUG = 1 if int(os.environ.get("DEBUG","1")) == 1 else 0
 
-ALLOWED_HOSTS: List[str] = []
+ALLOWED_HOSTS = []
 
 ROOT_URLCONF = "core.urls"
 
