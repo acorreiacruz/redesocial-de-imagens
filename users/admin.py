@@ -84,3 +84,18 @@ class PostAdminConfig(admin.ModelAdmin):
     list_display = "id", "username", "likes", "created_at"
     list_display_links = "id", "username"
     list_per_page = 25
+
+
+@admin.register(PostLike)
+class PostLikeAdminConfig(admin.ModelAdmin):
+    list_display = "id", "user", "post_id"
+    list_display_links = "user", "post_id"
+    list_per_page = 25
+
+
+@admin.register(Following)
+class FollowingAdminConfig(admin.ModelAdmin):
+    list_display = "id", "user", "following", "created_at"
+    list_display_links = "id" ,"user"
+    search_fields = "user", "following"
+    list_per_page = 25
