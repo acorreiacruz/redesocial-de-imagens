@@ -21,3 +21,15 @@ class RemarkLike(models.Model):
 
     def __str__(self):
         return f"Remark {self.id} liked by {self.liked_by.username}"
+
+    @property
+    def remark_id(self):
+        return self.remark.pk
+
+    @property
+    def user_id(self):
+        return self.liked_by.pk
+
+    @property
+    def post_id(self):
+        return self.remark.post.pk
