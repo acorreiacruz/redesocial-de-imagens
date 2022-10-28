@@ -2,7 +2,7 @@ from .models import User
 from .serializers import ProfileSerializer, UserSerializer
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import User, Profile
 
 
@@ -20,6 +20,11 @@ class UserViewSet(ModelViewSet):
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
         return queryset.filter(pk=self.request.user.pk)
+
+    def get_permissions(self, *args, **kwargs):
+        if self.request.method == "POST":
+            return [AllowAny(),]
+        return super().get_permissions(*args, **kwargs)
 
 
 class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
