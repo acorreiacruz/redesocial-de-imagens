@@ -1,5 +1,11 @@
+from django.db.models import Q
 from rest_framework import serializers
 from .models import User, Profile
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+
+class CustomJWTSerializer(TokenObtainPairSerializer):
+    username_field = "authentication_field"
 
 
 class UserSerializer(serializers.ModelSerializer):
