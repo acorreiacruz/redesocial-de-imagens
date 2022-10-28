@@ -12,8 +12,10 @@ class UserViewSet(ModelViewSet):
     permission_classes = [IsAuthenticated,]
     http_method_names = ["post", "patch", "get", "head", "options", "delete"]
 
-    def get_object(self, *args, **kwargs):
-        return super().get_object(*args, **kwargs)
+    def get_object(self):
+        queryset = self.get_queryset()
+        object = queryset.get(pk=self.request.user.pk)
+        return object
 
 
 class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
