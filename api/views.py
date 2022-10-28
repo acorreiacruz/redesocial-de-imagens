@@ -1,11 +1,10 @@
-from .models import User
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import ProfileSerializer, UserSerializer
+from .serializers import PostSerializer, ProfileSerializer, UserSerializer
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import User, Profile
+from .models import User, Profile, Post
 from rest_framework.decorators import action
 
 
@@ -40,6 +39,12 @@ class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     http_method_names = ['get', "patch", "options", "head"]
+
+
+class PostViewSet(ModelViewSet):
+    serializer_class = PostSerializer
+    queryset = Post.objects.all()
+    permission_classes = [IsAuthenticated,]
 
 
 
