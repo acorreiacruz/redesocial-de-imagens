@@ -10,6 +10,7 @@ app_name = "api"
 router = SimpleRouter()
 router.register("users", views.UserViewSet, "api-user")
 router.register("profiles", views.ProfileViewSet, "api-profile")
+router.register("posts", views.PostViewSet, "api-post")
 urlpatterns = [
     path('', include(router.urls)),
     path(
