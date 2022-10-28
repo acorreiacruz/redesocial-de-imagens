@@ -31,6 +31,7 @@ class ProfileSerializer(serializers.ModelSerializer):
             "following",
             "followers"
         ]
+        read_only_fields = ["following", "followers"]
     user = serializers.HyperlinkedRelatedField(
         many=False,view_name="api:api-user-detail",
         read_only=True
