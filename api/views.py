@@ -1,9 +1,12 @@
 from .models import User
+from rest_framework.response import Response
+from rest_framework import status
 from .serializers import ProfileSerializer, UserSerializer
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, RetrieveModelMixin
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import User, Profile
+from rest_framework.decorators import action
 
 
 class UserViewSet(ModelViewSet):
@@ -25,6 +28,12 @@ class UserViewSet(ModelViewSet):
         if self.request.method == "POST":
             return [AllowAny(),]
         return super().get_permissions(*args, **kwargs)
+
+    @action(detail=False,url_path="me")
+    def me(self, *args, **kwargs):
+        object = self.get_object()
+        serializer = self.serializer_class(object, many=False)
+        return Response(serializer.data, status.HTTP_200_OK)
 
 
 class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
