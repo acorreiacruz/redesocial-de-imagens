@@ -1,6 +1,6 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save, pre_delete
-from .models import Profile, User
+from .models import Profile, User, PostLike
 import os
 
 
@@ -32,3 +32,8 @@ def delete_profile_photo(sender, instance, *args, **kwargs):
     old_instance = Profile.objects.filter(id=instance.id).first()
     if old_instance:
         delete_photo(old_instance)
+
+
+def increase_likes(instance):
+    instance.likes += 1
+    instance.save()
