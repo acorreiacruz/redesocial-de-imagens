@@ -17,6 +17,10 @@ class UserViewSet(ModelViewSet):
         object = queryset.get(pk=self.request.user.pk)
         return object
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        return queryset.filter(pk=self.request.user.pk)
+
 
 class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
     queryset = Profile.objects.all()
