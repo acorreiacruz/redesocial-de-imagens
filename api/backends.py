@@ -7,12 +7,11 @@ User = get_user_model()
 
 
 class EmailOrPhoneNumberBackend(BaseBackend):
-
-    def authenticate(self, request, username=None, password=None, **kwargs):
-        if username is None or password is None:
-            return None
+    def authenticate(self, request, authentication_field=None, password=None , username=None):
         try:
-            user = User.objects.get(Q(Q(phone_number=username) | Q(email=username)))
+            user = User.objects.get(
+                    Q(phone_number=authentication_field or username) | Q(email=authentication_field or username)
+            )
         except User.DoesNotExist:
             return None
         if user.check_password(password) and self.user_can_authenticate(user):
