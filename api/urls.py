@@ -6,7 +6,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 app_name = "api"
 router = SimpleRouter()
-router.register("users", views.UserViewSet, "api_user")
+router.register("users", views.UserViewSet, "api-user")
+router.register("profiles", views.ProfileViewSet, "api-profile")
 urlpatterns = [
     path('', include(router.urls)),
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
