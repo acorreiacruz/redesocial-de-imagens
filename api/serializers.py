@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.exceptions import PermissionDenied
 from .models import User, Profile
 
 
@@ -17,3 +16,22 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = [
+            "id",
+            "username",
+            "user",
+            "photo",
+            "biography",
+            "is_private",
+            "following",
+            "followers"
+        ]
+    user = serializers.HyperlinkedRelatedField(
+        many=False,view_name="api:api-user-detail",
+        read_only=True
+    )
