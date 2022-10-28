@@ -1,6 +1,5 @@
-from django.db.models import Q
 from rest_framework import serializers
-from .models import User, Profile
+from .models import User, Profile, Tag, Post
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
@@ -40,5 +39,18 @@ class ProfileSerializer(serializers.ModelSerializer):
         read_only_fields = ["following", "followers"]
     user = serializers.HyperlinkedRelatedField(
         many=False,view_name="api:api-user-detail",
+        read_only=True
+    )
+
+
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["id", "user","photo", "text", "likes", "created_at", "updated_at"]
+        read_only_fields = ["likes", "created_at", "updated_at"]
+
+    user = serializers.HyperlinkedRelatedField(
+        many=False,
+        view_name="api:api-user-detail",
         read_only=True
     )
