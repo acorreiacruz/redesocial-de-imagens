@@ -37,3 +37,9 @@ def delete_profile_photo(sender, instance, *args, **kwargs):
 def increase_likes(instance):
     instance.likes += 1
     instance.save()
+
+
+@receiver(post_save, sender=PostLike)
+def like_post(sender, instance, created, **kwargs):
+    if created:
+        increase_likes(instance.post)
