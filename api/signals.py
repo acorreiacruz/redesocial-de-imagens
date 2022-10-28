@@ -39,7 +39,12 @@ def increase_likes(instance):
     instance.save()
 
 
+def decrease_likes(instance):
+    if instance.likes > 0:
+        instance.likes -= 1
+        instance.save()
+
+
 @receiver(post_save, sender=PostLike)
 def like_post(sender, instance, created, **kwargs):
     if created:
-        increase_likes(instance.post)
