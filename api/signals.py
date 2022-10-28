@@ -48,3 +48,9 @@ def decrease_likes(instance):
 @receiver(post_save, sender=PostLike)
 def like_post(sender, instance, created, **kwargs):
     if created:
+        increase_likes(instance.post)
+
+
+@receiver(pre_delete, sender=PostLike)
+def deslike_post(sender, instance, *args, **kwargs):
+    decrease_likes(instance.post)
