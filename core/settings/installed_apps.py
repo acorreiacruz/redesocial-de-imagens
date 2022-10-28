@@ -8,6 +8,8 @@ INSTALLED_APPS = [
     # Thrid party apps
     "phonenumber_field",
     "rest_framework",
+    "rest_framework_simplejwt",
+    "corsheaders",
     # My apps
     "api",
 ]
