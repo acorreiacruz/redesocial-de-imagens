@@ -46,6 +46,10 @@ class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     permission_classes = [IsAuthenticated,]
 
+    def get_queryset(self, *args, **kwargs):
+        queryset = super().get_queryset(*args, **kwargs)
+        return queryset.filter(user=self.request.user)
+
 
 
 
