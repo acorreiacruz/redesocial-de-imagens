@@ -50,6 +50,12 @@ class PostViewSet(ModelViewSet):
         queryset = super().get_queryset(*args, **kwargs)
         return queryset.filter(user=self.request.user)
 
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=self.request.user)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 
 
