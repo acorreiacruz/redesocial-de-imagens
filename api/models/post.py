@@ -9,7 +9,7 @@ class Post(models.Model):
         ordering = ("-id",)
         db_table = "posts"
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     photo = models.ImageField(upload_to="posts/photos/%Y/%m/%d/")
     text = models.CharField(max_length=2200, null=False, blank=False)
     likes = models.PositiveIntegerField(default=0)
