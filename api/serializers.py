@@ -127,3 +127,10 @@ class UserFollowingSerializer(serializers.ModelSerializer):
 
     following = FollowingSerializer(many=True)
 
+
+class UserFollowersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["followers",]
+
+    followers = FollowingSerializer(many=True)
