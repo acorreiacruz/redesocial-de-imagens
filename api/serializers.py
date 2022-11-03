@@ -93,3 +93,11 @@ class UserPostsListSerializer(serializers.ModelSerializer):
 
     posts = PostSerializer(many=True)
 
+
+class LikesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["postlikes",]
+
+    postlikes = PostLikeSerializer(many=True)
+
