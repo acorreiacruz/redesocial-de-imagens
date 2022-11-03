@@ -69,6 +69,7 @@ class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     http_method_names = ['get', "patch", "options", "head"]
+    permission_classes = [IsAuthenticated,]
 
 
 class PostViewSet(ModelViewSet):
