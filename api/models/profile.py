@@ -13,6 +13,7 @@ class Profile(models.Model):
     photo = models.ImageField(upload_to="profiles/photos/%Y/%m/%d/")
     biography = models.CharField(max_length=150, blank=True, null=False)
     is_private = models.BooleanField(default=False)
+    publications = models.PositiveIntegerField(default=0)
     following = models.PositiveIntegerField(default=0)
     followers = models.PositiveIntegerField(default=0)
 
