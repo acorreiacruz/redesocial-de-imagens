@@ -132,6 +132,18 @@ def follow_user(request, id1, id2):
     )
     return Response(status=status.HTTP_201_CREATED)
 
+@api_view(["get",])
+def unfollow_user(request, id1, id2):
+    following = get_object_or_404(
+        User.objects.all(),
+        id=id2
+    )
+    get_object_or_404(
+        Following.objects.all(),
+        user=request.user,
+        following=following
+    ).delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
