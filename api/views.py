@@ -1,10 +1,30 @@
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
 from rest_framework import status
-from .serializers import PostSerializer, ProfileSerializer, UserSerializer
-from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, RetrieveModelMixin
+from api.models.following import Following
+from .serializers import (
+    PostSerializer,
+    ProfileSerializer,
+    RemarkSerializer,
+    UserSerializer,
+    PostLikeSerializer,
+    PostRemarksSerializer,
+    LikesSerializer,
+    UserPostsListSerializer,
+    UserFollowingSerializer,
+    UserFollowersSerializer
+)
+from rest_framework.mixins import (
+    CreateModelMixin,
+    UpdateModelMixin,
+    RetrieveModelMixin,
+    ListModelMixin,
+    DestroyModelMixin
+)
 from rest_framework.viewsets import GenericViewSet, ModelViewSet
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import User, Profile, Post
+from .models import User, Profile, Post, PostLike, Remark, Following
 from rest_framework.decorators import action
 
 
@@ -34,6 +54,10 @@ class UserViewSet(ModelViewSet):
         serializer = self.serializer_class(object, many=False)
         return Response(serializer.data, status.HTTP_200_OK)
 
+    @action(methods=["get",], detail=False, url_path="following", url_name="following")
+    def list_user_following(self, *args, **kwargs):
+        serializer = UserFollowingSerializer(instance=self.request.user, many=False, context={"request": self.request})
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
 class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
     queryset = Profile.objects.all()
