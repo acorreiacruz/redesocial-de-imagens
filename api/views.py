@@ -100,6 +100,11 @@ class PostViewSet(ModelViewSet):
         serializer = PostRemarksSerializer(instance=self.get_object(), many=False)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=["get",], url_path="likes", url_name="likes")
+    def list_post_likes(self, *args, **kwargs):
+        serializer = LikesSerializer(instance=self.get_object(), many=False, context={"request":self.request})
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 
 
 
