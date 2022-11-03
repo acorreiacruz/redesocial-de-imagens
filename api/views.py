@@ -71,6 +71,14 @@ class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
     http_method_names = ['get', "patch", "options", "head"]
     permission_classes = [IsAuthenticated,]
 
+    @action(methods=["get",], detail=False, url_name="user-posts", url_path="user/posts")
+    def lis_user_posts(self, *args, **kwargs):
+        serializer = UserPostsListSerializer(
+            instance=self.request.user, many=False,
+            context={"request": self.request}
+        )
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 
 class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
