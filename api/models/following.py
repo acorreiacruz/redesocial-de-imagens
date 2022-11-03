@@ -24,7 +24,7 @@ class Following(models.Model):
         errors = {}
         if self.user.id == self.following.id:
             errors['user'] = "A user can't follow yourself !"
-            errors['following'] = "A user can't be followed by yoursel !"
+            errors['following'] = "A user can't be followed by yourself!"
         if errors:
             raise ValidationError(errors)
 
