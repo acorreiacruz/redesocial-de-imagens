@@ -45,6 +45,11 @@ def decrease_likes(instance):
         instance.save()
 
 
+def increase_publications(instance):
+    instance.publications +=1
+    instance.save()
+
+
 def decrease_publications(instance):
     if instance.publications > 0:
         instance.publications -= 1
