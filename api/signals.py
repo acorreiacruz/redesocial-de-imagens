@@ -45,6 +45,11 @@ def decrease_likes(instance):
         instance.save()
 
 
+def decrease_publications(instance):
+    if instance.publications > 0:
+        instance.publications -= 1
+        instance.save()
+
 @receiver(post_save, sender=PostLike)
 def like_post(sender, instance, created, **kwargs):
     if created:
@@ -54,3 +59,4 @@ def like_post(sender, instance, created, **kwargs):
 @receiver(pre_delete, sender=PostLike)
 def deslike_post(sender, instance, *args, **kwargs):
     decrease_likes(instance.post)
+
