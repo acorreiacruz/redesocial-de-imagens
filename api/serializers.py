@@ -119,3 +119,11 @@ class FollowingSerializer(serializers.ModelSerializer):
         queryset=User.objects.all()
     )
 
+
+class UserFollowingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["following",]
+
+    following = FollowingSerializer(many=True)
+
