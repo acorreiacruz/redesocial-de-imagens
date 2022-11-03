@@ -64,3 +64,11 @@ class PostSerializer(serializers.ModelSerializer):
         view_name="api:api-user-detail",
         read_only=True
     )
+
+
+class PostRemarksSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ["remarks",]
+
+    remarks = RemarkSerializer(many=True)
