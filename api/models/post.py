@@ -17,7 +17,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Post of user:{self.user.username}"
+        return f"Post {self.id} of user:{self.user.username}"
 
     @property
     def username(self):
