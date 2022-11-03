@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import User, Profile, Tag, Post
+from api.models import following
+from api.models.remark import Remark
+from .models import User, Profile, Tag, Post, Following, PostLike
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
@@ -41,6 +43,14 @@ class ProfileSerializer(serializers.ModelSerializer):
         many=False,view_name="api:api-user-detail",
         read_only=True
     )
+
+
+class RemarkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Remark
+        fields=["id", "user", "text", "likes", "created_at", "updated_at"]
+        read_only_fields = ["likes", "created_at", "updated_at", "user", "post"]
+    user = serializers.StringRelatedField(many=False)
 
 
 class PostSerializer(serializers.ModelSerializer):
