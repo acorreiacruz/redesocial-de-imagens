@@ -106,6 +106,12 @@ class PostViewSet(ModelViewSet):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
+class PostLikeViewSet(ModelViewSet):
+    queryset = PostLike.objects.all()
+    serializer_class = PostLikeSerializer
+    permission_classes = [IsAuthenticated,]
+    http_method_names = ["post", "patch", "get", "head", "options", "delete"]
+
 
 
 
