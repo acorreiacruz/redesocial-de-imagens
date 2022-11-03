@@ -84,3 +84,12 @@ class PostLikeSerializer(serializers.ModelSerializer):
         view_name="api:api-user-detail",
         queryset=User.objects.all()
     )
+
+
+class UserPostsListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["posts"]
+
+    posts = PostSerializer(many=True)
+
