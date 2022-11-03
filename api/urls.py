@@ -7,10 +7,13 @@ from .serializers import CustomJWTSerializer
 
 
 app_name = "api"
+
 router = SimpleRouter()
 router.register("users", views.UserViewSet, "api-user")
 router.register("profiles", views.ProfileViewSet, "api-profile")
 router.register("posts", views.PostViewSet, "api-post")
+router.register("postlikes", views.PostLikeViewSet, "api-postlike")
+
 urlpatterns = [
     path('', include(router.urls)),
     path(
