@@ -59,6 +59,12 @@ class UserViewSet(ModelViewSet):
         serializer = UserFollowingSerializer(instance=self.request.user, many=False, context={"request": self.request})
         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
+    @action(methods=["get",], detail=False, url_path="followers", url_name="followers")
+    def list_user_followers(self, *args, **kwargs):
+        serializer = UserFollowersSerializer(instance=self.request.user, many=False, context={"request": self.request})
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+
+
 class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
