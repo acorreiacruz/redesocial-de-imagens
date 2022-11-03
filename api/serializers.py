@@ -101,3 +101,21 @@ class LikesSerializer(serializers.ModelSerializer):
 
     postlikes = PostLikeSerializer(many=True)
 
+
+class FollowingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Following
+        fields = ["id","user","following", "created_at"]
+
+    user = serializers.HyperlinkedRelatedField(
+        many=False,
+        view_name="api:api-user-detail",
+        queryset=User.objects.all()
+    )
+
+    following = serializers.HyperlinkedRelatedField(
+        many=False,
+        view_name="api:api-user-detail",
+        queryset=User.objects.all()
+    )
+
