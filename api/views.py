@@ -95,6 +95,11 @@ class PostViewSet(ModelViewSet):
         serializer.save(user=self.request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
+    @action(detail=True, methods=["get",],url_path="remarks",url_name="remarks")
+    def list_post_remarks(self, *args, **kwargs):
+        serializer = PostRemarksSerializer(instance=self.get_object(), many=False)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
 
 
 
