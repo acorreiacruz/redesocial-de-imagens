@@ -113,6 +113,12 @@ class PostLikeViewSet(ModelViewSet):
     http_method_names = ["post", "patch", "get", "head", "options", "delete"]
 
 
+class RemarkViewSet(GenericViewSet, ListModelMixin, DestroyModelMixin, CreateModelMixin):
+    queryset = Remark.objects.all()
+    serializer_class = RemarkSerializer
+    permission_classes = [IsAuthenticated,]
+    http_method_names = ["post", "patch", "get", "head", "options", "delete"]
+
 
 
 
