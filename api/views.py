@@ -120,6 +120,18 @@ class RemarkViewSet(GenericViewSet, ListModelMixin, DestroyModelMixin, CreateMod
     http_method_names = ["post", "patch", "get", "head", "options", "delete"]
 
 
+@api_view(["get",])
+def follow_user(request, id1, id2):
+    following = get_object_or_404(
+        User.objects.all(),
+        id=id2
+    )
+    Following.objects.create(
+        user=request.user,
+        following=following
+    )
+    return Response(status=status.HTTP_201_CREATED)
+
 
 
 
