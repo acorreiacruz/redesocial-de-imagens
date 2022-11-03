@@ -15,6 +15,7 @@ router.register("posts", views.PostViewSet, "api-post")
 router.register("postlikes", views.PostLikeViewSet, "api-postlike")
 
 urlpatterns = [
+    path("users/<int:id1>/follow/<int:id2>/", views.follow_user, name="follow_user"),
     path('', include(router.urls)),
     path(
         "token/",
