@@ -60,7 +60,7 @@ class UserAdminConfig(UserAdmin):
 
 @admin.register(Profile)
 class ProfileAdminConfig(admin.ModelAdmin):
-    list_display = "id", "username", "is_private"
+    list_display = "id", "username", "is_private", "publications"
     list_per_page = 25
     list_display_links = ("id",)
     list_filter = ("is_private",)
