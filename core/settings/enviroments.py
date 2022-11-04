@@ -1,14 +1,14 @@
-from pathlib import Path
 import os
-
+from pathlib import Path
+from typing import List
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY","Insecure")
+SECRET_KEY = os.environ.get("SECRET_KEY", "Insecure")
 
-DEBUG = 1 if int(os.environ.get("DEBUG","1")) == 1 else 0
+DEBUG = 1 if int(os.environ.get("DEBUG", "1")) == 1 else 0
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 ROOT_URLCONF = "core.urls"
 
