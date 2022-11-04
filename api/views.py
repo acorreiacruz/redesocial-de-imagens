@@ -77,11 +77,16 @@ class UserViewSet(
 class ProfileViewSet(GenericViewSet, UpdateModelMixin, RetrieveModelMixin):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    http_method_names = ["get", "patch", "options", "head"]
+    permission_classes = [IsAuthenticated, ]
 
 
 class PostViewSet(ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
+    permission_classes = [
+        IsAuthenticated,
+    ]
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
