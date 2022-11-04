@@ -1,37 +1,36 @@
-from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
-from rest_framework.decorators import api_view
 from rest_framework import status
-from api.models.following import Following
+from rest_framework.decorators import action, api_view
+from rest_framework.mixins import (
+    CreateModelMixin,
+    DestroyModelMixin,
+    RetrieveModelMixin,
+    UpdateModelMixin,
+    ListModelMixin
+)
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet, ModelViewSet
+from .models import Following, Post, PostLike, Profile, Remark, User
 from .serializers import (
+    LikesSerializer,
+    PostLikeSerializer,
+    PostRemarksSerializer,
     PostSerializer,
     ProfileSerializer,
     RemarkSerializer,
-    UserSerializer,
-    PostLikeSerializer,
-    PostRemarksSerializer,
-    LikesSerializer,
-    UserPostsListSerializer,
+    UserFollowersSerializer,
     UserFollowingSerializer,
-    UserFollowersSerializer
+    UserSerializer,
 )
-from rest_framework.mixins import (
-    CreateModelMixin,
-    UpdateModelMixin,
-    RetrieveModelMixin,
-    ListModelMixin,
-    DestroyModelMixin
-)
-from rest_framework.viewsets import GenericViewSet, ModelViewSet
-from rest_framework.permissions import IsAuthenticated, AllowAny
-from .models import User, Profile, Post, PostLike, Remark, Following
-from rest_framework.decorators import action
 
 
-class UserViewSet(ModelViewSet):
+class UserViewSet(
+    GenericViewSet, CreateModelMixin,
+    UpdateModelMixin, DestroyModelMixin, ListModelMixin
+):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated,]
     http_method_names = ["post", "patch", "get", "head", "options", "delete"]
 
     def get_object(self):
