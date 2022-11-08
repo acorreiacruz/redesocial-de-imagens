@@ -80,6 +80,11 @@ class RemarkSerializer(serializers.ModelSerializer):
             user=user, post=post, text=text
         )
 
+    def update(self, instance, validated_data):
+        instance.text = validated_data.get("text", instance.text)
+        instance.save()
+        return instance
+
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
