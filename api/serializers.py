@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from api.models import following
-from api.models.remark import Remark
-from .models import User, Profile, Tag, Post, Following, PostLike
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.shortcuts import get_object_or_404
+from api.models.remark import Remark
+from .models import Following, Post, PostLike, Profile, User
 
 
 class CustomJWTSerializer(TokenObtainPairSerializer):
@@ -13,12 +13,17 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            "id", "first_name", "last_name",
-            "username", "email", "phone_number", "password"
+            "id",
+            "first_name",
+            "last_name",
+            "username",
+            "email",
+            "phone_number",
+            "password",
         ]
 
     def create(self, validated_data):
-        password = validated_data.pop('password')
+        password = validated_data.pop("password")
         user = User(password=password, **validated_data)
         user.set_password(password)
         user.save()
