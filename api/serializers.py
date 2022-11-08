@@ -89,14 +89,18 @@ class RemarkSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
+        fields = ["id", "user", "photo", "text", "likes", "updated_at"]
+        read_only_fields = ["likes", "updated_at"]
 
     user = serializers.HyperlinkedRelatedField(
+        many=False, view_name="api:api-user-detail", read_only=True
     )
 
 
 class PostRemarksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
+        fields = ["remarks"]
 
     remarks = RemarkSerializer(many=True)
 
