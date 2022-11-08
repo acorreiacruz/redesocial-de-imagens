@@ -117,6 +117,14 @@ class PostLikeSerializer(serializers.ModelSerializer):
         queryset=User.objects.all()
     )
 
+    def create(self, validated_data):
+        user = validated_data.get('user')
+        post = get_object_or_404(
+            Post.objects.all(),
+            id=validated_data.get("post_id")
+        )
+        return PostLike.objects.create(user=user, post=post)
+
 
 class UserPostsListSerializer(serializers.ModelSerializer):
     class Meta:
