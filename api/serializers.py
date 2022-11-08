@@ -41,40 +41,40 @@ class ProfileSerializer(serializers.ModelSerializer):
             "biography",
             "is_private",
             "following",
-            "followers"
+            "followers",
         ]
         read_only_fields = ["following", "followers"]
+
     user = serializers.HyperlinkedRelatedField(
-        many=False,view_name="api:api-user-detail",
-        read_only=True
+        many=False, view_name="api:api-user-detail", read_only=True
     )
 
 
 class RemarkSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Remark
-        fields=["id", "user", "text", "likes", "created_at", "updated_at"]
-        read_only_fields = ["likes", "created_at", "updated_at", "user", "post"]
-    user = serializers.StringRelatedField(many=False)
+        model = Remark
+        fields = [
+            "id",
+            "username",
+            "user",
+            "text",
+            "likes",
+            "updated_at",
+            "post_id"
+        ]
 
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ["id", "user","photo", "text", "likes", "created_at", "updated_at"]
-        read_only_fields = ["likes", "created_at", "updated_at"]
 
     user = serializers.HyperlinkedRelatedField(
-        many=False,
-        view_name="api:api-user-detail",
-        read_only=True
     )
 
 
 class PostRemarksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ["remarks",]
 
     remarks = RemarkSerializer(many=True)
 
