@@ -63,6 +63,7 @@ class RemarkSerializer(serializers.ModelSerializer):
             "post_id"
         ]
         read_only_fields = ["likes", "updated_at", "id", "username"]
+    post_id = serializers.IntegerField()
 
 
 class PostSerializer(serializers.ModelSerializer):
