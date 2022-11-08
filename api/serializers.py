@@ -69,6 +69,17 @@ class RemarkSerializer(serializers.ModelSerializer):
         read_only=True
     )
 
+    def create(self, validated_data):
+        user = validated_data.get("user")
+        post = get_object_or_404(
+            Post.objects.all(),
+            id=validated_data.get("post_id")
+        )
+        text = validated_data.get("text")
+        return Remark.objects.create(
+            user=user, post=post, text=text
+        )
+
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
