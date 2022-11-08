@@ -156,7 +156,7 @@ class FollowingSerializer(serializers.ModelSerializer):
 class UserFollowingSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["following",]
+        fields = ["following"]
 
     following = FollowingSerializer(many=True)
 
@@ -164,6 +164,6 @@ class UserFollowingSerializer(serializers.ModelSerializer):
 class UserFollowersSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["followers",]
+        fields = ["followers"]
 
     followers = FollowingSerializer(many=True)
