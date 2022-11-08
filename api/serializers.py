@@ -64,6 +64,10 @@ class RemarkSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["likes", "updated_at", "id", "username"]
     post_id = serializers.IntegerField()
+    user = serializers.HyperlinkedRelatedField(
+        many=False, view_name="api:api-user-detail",
+        read_only=True
+    )
 
 
 class PostSerializer(serializers.ModelSerializer):
