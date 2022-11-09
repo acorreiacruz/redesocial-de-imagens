@@ -1,6 +1,6 @@
 from django.dispatch import receiver
 from django.db.models.signals import post_save, pre_save, pre_delete
-from .models import Profile, User, PostLike
+from .models import Profile, User, PostLike, Post
 import os
 
 
@@ -65,3 +65,9 @@ def like_post(sender, instance, created, **kwargs):
 def deslike_post(sender, instance, *args, **kwargs):
     decrease_likes(instance.post)
 
+
+@receiver(post_save, sender=Post)
+def create_post(sender, instance, created, **kwargs):
+    if created:
+        profile = Profile.objects.get(pk=instance.user.id)
+        increase_publications(profile)
