@@ -71,3 +71,9 @@ def create_post(sender, instance, created, **kwargs):
     if created:
         profile = Profile.objects.get(pk=instance.user.id)
         increase_publications(profile)
+
+
+@receiver(pre_delete, sender=Post)
+def delete_post(sender, instance, *args, **kwargs):
+    profile = Profile.objects.get(pk=instance.user.id)
+    decrease_publications(profile)
